@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block mainContent %}
+
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		
+		<h1 class="display-8">Converter</h1>
+		<p class="lead">Try out my currency converter</p>
+
+	</div>
+</div>
+
+<form class="container" action="{{url_for('calculate')}}" method="post">
+
+	<div class="row d-flex align-items-center justify-content-center">
+		<div>
+			<div>{{message}}</div>
+		</div>
+	</div>
+
+	<div class="row mt-2 d-flex align-items-center justify-content-center">
+		<div class="col-lg-2 col-md-3">
+			<input type="text" name="convFrom" class="form-control" placeholder="Convert From" value="{{fromVal}}" required>
+		</div>
+
+		<div class="col-lg-2 col-md-3">
+			<input type="text" name="convTo" class="form-control" placeholder="Convert To" value="{{toVal}}" required>
+		</div>
+
+		<div class="col-lg-2 col-md-3">
+			<input type="number" name="convAmount" class="form-control" placeholder="Amount" value="{{amountVal}}" required>
+		</div>
+<!-- 
+		<div class="col-lg-3">
+			<input type="submit" name="convSubmitButton" value="Calculate" class="btn btn-primary">	
+		</div> -->
+	</div>
+
+	<div class="row mt-3 d-flex align-items-center justify-content-center">
+		<div class="col-lg-1.5">
+				<input type="submit" name="convSubmitButton" value="Calculate" class="btn btn-primary">	
+		</div>
+	</div>
+
+	<div class="row mt-3 d-flex align-items-center justify-content-center">
+		<div class="col-lg-2">
+			<input type="text" name="convResult" class="form-control" placeholder="Result" value="{{result}}">
+		</div>
+
+	</div>
+
+</form>
+
+{% endblock %}
