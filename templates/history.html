@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block mainContent %}
+
+<div class="jumbotron jumbotron-fluid">
+	<div class="container">
+		<h1 class="display-8">Conversion History</h1>
+		<p class="lead">Resets every app reload, data is not kept in a database</p>
+	</div>
+</div>
+
+<div class="col-md-8 offset-md-2">
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">From</th>
+      <th scope="col">To</th>
+      <th scope="col">Value</th>
+      <th scope="col">Result</th>
+      <th scope="col">Rate</th>
+      <th scope="col">Date</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    {% for t in hist %}
+    <tr>
+    	{% for e in t %}
+    	<td>{{e}}</td>
+    	{% endfor %}
+    </tr>
+    {% endfor %}
+
+  </tbody>
+</table>
+</div>
+
+{% endblock %}

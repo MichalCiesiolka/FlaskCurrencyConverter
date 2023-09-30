@@ -2,9 +2,12 @@ from flask import Flask, render_template, url_for, request
 from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
 import requests
+from datetime import date, time, datetime
 
 # Create Flask instance
 app = Flask(__name__)
+
+hist = []
 
 # Create a route decorator
 @app.route('/')
@@ -21,16 +24,28 @@ def calculate():
 	to = request.form["convTo"]
 	val = int(request.form["convAmount"])
 	rate = get_conversion_rate(frm, to)
+	date = datetime.now()
+	date = date.strftime("%Y-%m-%d %H:%M")
 	if rate != 0:
 		res = str(multiply_round(rate, val))
 		message = f"1 {frm} = {rate} {to}"
+		hist.append((frm, to, val, res, message, date))
+
 	else:
 		res = "ERROR"
 		message = "An error occurred, please make sure the currencies are valid."
 	return render_template("converter.html", result=res, fromVal=frm, toVal=to, amountVal=val, message=message)
 
+@app.route("/history")
+def history():
+	return render_template("history.html", hist=hist)
+
+@app.route("/historytest")
+def historytest():
+	return hist
 
 
+# Scraping and calculating
 headers = {
     'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/117.0'
 }
